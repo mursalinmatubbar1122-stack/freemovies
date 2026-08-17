@@ -44,7 +44,7 @@
       name: 'Social Bar',
       status: 'on',
       duration: 'unlimited',
-      scriptSrc: 'https://pl30706912.effectivecpmnetwork.com/5b/8b/4a/5b8b4a34456001f4d0922fa068070fce.js'
+      scriptSrc: 'https://pl30885734.effectivecpmnetwork.com/49/e6/2a/49e62aa249254fb00f321008acda713e.js'
     },
 
     banner728x90: {
