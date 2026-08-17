@@ -18,7 +18,7 @@
       appId: '1:62690080088:web:f4e7042fb4ad8248cce12d'
     },
     tmdb: {
-      apiKey: '9d0f10dd934f1c2a6e91954041550593',
+      apiKey: '0bbe52278e56df3d072e264247835d43',
       apiBaseUrl: 'https://api.themoviedb.org/3',
       imageBaseUrl: 'https://image.tmdb.org/t/p'
     },
