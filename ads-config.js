@@ -22,7 +22,7 @@
       name: 'Direct link',
       status: 'on',
       duration: 'unlimited',
-      url: 'https://example.com/'
+      url: 'https://www.effectivecpmnetwork.com/mt31bk6kgi?key=84312ad83e3a46232ecefedfb95bd705'
     },
 
     nativeBanner: {
