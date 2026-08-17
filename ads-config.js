@@ -29,8 +29,8 @@
       name: 'Native Banner',
       status: 'on',
       duration: 'unlimited',
-      scriptSrc: 'https://pl30706913.effectivecpmnetwork.com/022365bfc231eeca69e2e1541fc25098/invoke.js',
-      containerId: 'container-022365bfc231eeca69e2e1541fc25098'
+      scriptSrc: 'https://pl30885733.effectivecpmnetwork.com/b3775426ad737420670c584a89ecce53/invoke.js',
+      containerId: 'container-b3775426ad737420670c584a89ecce53'
     },
 
     popunder: {
