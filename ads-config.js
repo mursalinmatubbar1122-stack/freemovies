@@ -37,7 +37,7 @@
       name: 'Popunder',
       status: 'on',
       duration: 'unlimited',
-      scriptSrc: 'https://pl30706911.effectivecpmnetwork.com/09/68/6b/09686b86c2744d20c2ae98b69615b5cd.js'
+      scriptSrc: 'https://pl30885732.effectivecpmnetwork.com/25/67/6c/25676c4aa2ea8cc3aad3ebbe747b7fea.js'
     },
 
     socialBar: {
