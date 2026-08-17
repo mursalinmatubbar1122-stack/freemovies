@@ -51,8 +51,8 @@
       name: 'Banner 728x90',
       status: 'on',
       duration: 'unlimited',
-      key: 'ddcb57682287c3bc03a188bbb32523b8',
-      scriptSrc: 'https://www.highperformanceformat.com/ddcb57682287c3bc03a188bbb32523b8/invoke.js'
+      key: '3c9dc0777afb301a335c35f834cc22a1',
+      scriptSrc: 'https://www.highperformanceformat.com/3c9dc0777afb301a335c35f834cc22a1/invoke.js'
     }
   };
 
