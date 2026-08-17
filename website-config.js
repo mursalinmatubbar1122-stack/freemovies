@@ -12,7 +12,7 @@
     pageTitle: 'Free Movies - Watch Movies, TV Shows & Anime',
     logoText: 'Free Movies',
     logoImagePosition: 2,
-    logoImageUrl: 'logo-icon.png',
+    logoImageUrl: '#',
     logoImageAlt: 'GoToCinema logo'
   };
 
