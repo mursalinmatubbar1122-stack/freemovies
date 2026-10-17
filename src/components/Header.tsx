@@ -117,23 +117,8 @@ export const Header: React.FC<HeaderProps> = ({
           }}
           title={SITE_CONFIG.siteName}
         >
-          <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-            <span>G</span>
-            <img
-              src="/logo-icon.png"
-              alt="O"
-              style={{
-                height: '0.82em',
-                width: '0.82em',
-                objectFit: 'contain',
-                margin: '0 1px',
-              }}
-              onError={(e) => {
-                // fallback if missing
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
-            <span>TO</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ fontWeight: 800, letterSpacing: '0.04em' }}>PRIO</span>
             <span className="cinema-text">CINEMA</span>
           </span>
 

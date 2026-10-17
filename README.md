@@ -1,4 +1,4 @@
-# FreeMovies (GoToCinema) - React Application
+# Prio Cinema - React Application
 
 A modern, responsive React + TypeScript + Vite web application for streaming and discovering movies, TV shows, anime, and live TV channels.
 

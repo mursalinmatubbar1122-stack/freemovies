@@ -1,9 +1,9 @@
 import { PlayerTemplate } from '../types';
 
 export const SITE_CONFIG = {
-  siteName: 'FreeMovies',
-  pageTitle: 'Free Movies - Watch Movies, TV Shows & Anime',
-  logoText: 'Free Movies',
+  siteName: 'Prio Cinema',
+  pageTitle: 'Prio Cinema - Watch Movies, TV Shows & Anime',
+  logoText: 'Prio Cinema',
   primaryColor: '#FF0000',
 };
 
@@ -34,9 +34,9 @@ export const API_CONFIG = {
 export const ADMIN_CONFIG = {
   adminEmails: ['rizviyankhan@gmail.com', 'mursalinmatubbar1122@gmail.com'],
   profile: {
-    name: 'Free Movies',
+    name: 'Prio Cinema',
     imageUrl: '',
-    about: 'GoToCinema administrator',
+    about: 'Prio Cinema administrator',
   },
 };
 
