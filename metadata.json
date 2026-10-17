@@ -1,0 +1,6 @@
+{
+  "name": "FreeMovies - Watch Movies, TV Shows & Anime",
+  "description": "Watch movies, TV shows, and anime with multi-server streaming, live TV IPTV channels, search, trailers, and personal accounts.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

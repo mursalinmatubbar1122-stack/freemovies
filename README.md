@@ -1,119 +1,68 @@
-# GoToCinema
+# FreeMovies (GoToCinema) - React Application
 
-Complete static GoToCinema website export.
+A modern, responsive React + TypeScript + Vite web application for streaming and discovering movies, TV shows, anime, and live TV channels.
 
-## Run locally
+Rewritten as a clean React single-page application from the original Dynamic codebase, preserving 100% of the core functionality, business logic, visual identity, and features.
 
+---
+
+## 🚀 Features
+
+- **Movies, TV Shows & Anime:**
+  - Integrated with The Movie Database (TMDB) API for real-time popular, trending, and top-rated movies and TV series.
+  - AniList GraphQL API integration for trending and featured anime titles, episode counts, and character rosters.
+  - Dynamic multi-server player embed switcher with support for custom streaming embeds (YouTube, Google Drive, Archive.org, direct URLs).
+  - TV Show season & episode controls with season length metadata, arrow incrementers, and episode navigation.
+  - Anime episode navigation with prev/next buttons.
+  - Official trailer integration with instant modal preview and seamless player return.
+  - Cast cards with character descriptions and actor portrait profiles.
+  - Actor/Person modal with biographical details and their full credited filmography.
+
+- **Live TV & Sports Streaming:**
+  - HLS (`hls.js`) video streaming player for live IPTV channels.
+  - Real-time M3U playlist parsing with automated category grouping, search filtering, and local caching.
+  - Stream error detection with automated 3-second recovery and next-channel switching.
+  - Multi-tab support for Live IPTV, FIFA / Sports viewer, and external movie stream views with reorderable tab layouts.
+
+- **Discovery & Search:**
+  - Real-time live search with instant suggestion previews categorized by People and Movies/Shows.
+  - Speech Recognition voice search via the Web Speech API.
+  - Advanced Discovery drawer with multi-criteria filtering: media type (Movie, TV, Anime), 30+ spoken languages, genre categorization, release year, and sorting algorithms.
+  - Auto-scrolling Featured Carousel with touch/mouse drag scrub and hover pause.
+  - Real-time trending ticker in the top bar rotating top titles daily.
+
+- **User Accounts & Admin Control:**
+  - Firebase Authentication (email/password sign in and sign up).
+  - User profiles with display name, bio, and ImgBB avatar image uploads.
+  - Role-based Admin panel for designated admin emails (`ADMIN_CONFIG.adminEmails`):
+    - Configure IPTV M3U playlist URL, Sports URL, and Movies URL.
+    - Custom tab ordering for Live TV streams.
+    - Full CRUD management for Movie player templates (`{id}`), TV player templates (`{id}`, `{s}`, `{e}`), and Anime player templates (`{id}`, `{e}`).
+    - Direct download link editor and custom player override for any specific title.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** React 18, TypeScript, Vite
+- **Streaming:** `hls.js` (HTTP Live Streaming)
+- **Backend / Auth:** Firebase Auth & Cloud Firestore
+- **External APIs:** TMDB v3 API, AniList GraphQL API, ImgBB Upload API
+- **Icons & Styling:** SVG icons, Poppins & Montserrat typography, CSS3 gradients & animations
+
+---
+
+## 📦 Getting Started
+
+### Development
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
+The development server starts on port `3000` (`http://localhost:3000`).
 
-Open `http://localhost:8000`.
-
-## GitHub Pages
-
-Upload the contents of this folder to the repository root, then enable GitHub Pages from the repository's **Settings → Pages** menu using the branch root folder.
-
-## Ad and direct-link settings
-
-Edit only `ads-config.js`. Each setting has a name, a `status` value, and a `duration` value. Use `"on"` to enable it or `"off"` to disable it. Use `duration: "unlimited"` for an ad that always runs, or `duration: "#"` to follow the timer. No `index.html` edit is needed.
-
-The default timer shows timed ads for 10 minutes after a visitor's first visit, then hides the timer and pauses timed ads until the next cycle. Change `adsTimer.repeatEveryHours` to `1`, `2`, `10`, or any positive number of hours to choose when the next 10-minute window begins. The timer is stored per browser, so refreshing the page does not restart it.
-
-- Direct link: opens in a new tab when a movie, TV, or anime poster is clicked.
-- Popunder: loads globally for normal page interaction.
-- Social Bar: loads globally.
-- Banner 728x90: appears responsively below the player on details pages.
-- Native Banner: appears below the cast profiles on details pages.
-
-## Website name and logo
-
-Edit only `website-config.js` to change the visible website name, browser title, logo text, or logo image URL:
-
-```js
-siteName: 'GoToCinema',
-pageTitle: 'Go To Cinema - Watch Movies, TV Shows & Anime',
-logoText: 'GOTO CINEMA',
-logoImagePosition: 2,
-logoImageUrl: 'logo-icon.png'
+### Production Build
+```bash
+npm run build
+npm run preview
 ```
-
-`logoImagePosition` counts letters from left to right, ignoring spaces. With `2`, the logo replaces the second letter (`O`) in `GOTO`. Change it to `3` to replace the third letter. Set `logoImageUrl: '#'` to hide the logo and show the original letter again.
-
-The first words of `logoText` use the bold style and the last word uses the thin style. This also works with three-word names: the first two words stay bold and the last word stays thin. You can replace `logoImageUrl` with a local image path or a public image URL.
-
-## Website primary color
-
-Edit only `website-colors.js`:
-
-```js
-primaryColor: '#16a34a'
-```
-
-This changes the main red accent color to the selected color. The current export uses green (`#16a34a`) as the working example.
-
-The admin-panel color customization has been removed. Website colors are no longer read from or saved to Firebase; `website-colors.js` is the only primary-color source.
-
-## API settings
-
-Edit only `api-config.js` to change the public API settings used by the site:
-
-- Firebase authentication and Firestore project settings
-- TMDB API key, API URL, and image URL
-- AniList GraphQL URL and editable featured anime ID
-- ImgBB upload settings used for normal member profile photos
-
-This file is loaded before the main application code. It is included in this
-ZIP and must stay beside `index.html` when uploading the site to GitHub Pages.
-Do not place private server-only credentials in this browser-visible file.
-
-To change the featured anime loaded directly from AniList, edit only the
-`animeId` value inside `api-config.js`:
-
-```js
-anilist: {
-  apiUrl: 'https://graphql.anilist.co',
-  animeId: 47880
-}
-```
-
-The configured anime is shown first in the Anime tab. The remaining Anime tab
-items continue to load from AniList's trending and popular lists.
-
-## Admin settings
-
-Edit only `admin-config.js` to change administrator access and the admin
-profile:
-
-```js
-adminEmails: [
-  'first-admin@gmail.com',
-  'second-admin@gmail.com'
-],
-profile: {
-  name: 'GoToCinema Admin',
-  imageUrl: 'logo-icon.png',
-  about: 'GoToCinema administrator'
-}
-```
-
-The email list supports multiple Gmail addresses. The admin name, image, and
-about text are read from this file and are not loaded from or saved to
-Firebase. Keep `admin-config.js` beside `index.html`.
-
-## Social media links
-
-Edit only `social-media-config.js` to set the header links for Facebook,
-YouTube, Telegram, and Instagram:
-
-```js
-window.GTC_SOCIAL_MEDIA_CONFIG = {
-  facebook: '#',
-  youtube: 'https://youtube.com/your-channel',
-  telegram: 'https://t.me/your-channel',
-  instagram: '#'
-};
-```
-
-Keep `#` for a platform without a URL. Icons with a URL open the link in a
-new browser tab. This file must stay beside `index.html` on GitHub Pages.
