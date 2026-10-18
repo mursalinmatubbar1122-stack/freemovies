@@ -116,16 +116,18 @@ export const Header: React.FC<HeaderProps> = ({
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           title={SITE_CONFIG.siteName}
+          aria-label="Priyo Movie Home"
         >
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
-            <span style={{ fontWeight: 800, letterSpacing: '0.04em' }}>PRIO</span>
-            <span className="cinema-text">CINEMA</span>
-          </span>
+          <img
+            src="/src/assets/images/priyo_movie_logo_1792294427603.jpg"
+            alt="Priyo Movie Logo"
+            className="logo-img-mark"
+            referrerPolicy="no-referrer"
+          />
 
-          <div className="icon-container">
-            <div className="licon lactive">
-              {ICONS[logoIconIdx]}
-            </div>
+          <div className="logo-title-group">
+            <span className="logo-priyo">PRIYO</span>
+            <span className="logo-movie">MOVIE</span>
           </div>
         </button>
 

@@ -1,10 +1,10 @@
 import { PlayerTemplate } from '../types';
 
 export const SITE_CONFIG = {
-  siteName: 'Prio Cinema',
-  pageTitle: 'Prio Cinema - Watch Movies, TV Shows & Anime',
-  logoText: 'Prio Cinema',
-  primaryColor: '#FF0000',
+  siteName: 'Priyo Movie',
+  pageTitle: 'Priyo Movie - Watch Movies, TV Shows & Anime',
+  logoText: 'Priyo Movie',
+  primaryColor: '#e50914',
 };
 
 export const API_CONFIG = {
@@ -34,9 +34,9 @@ export const API_CONFIG = {
 export const ADMIN_CONFIG = {
   adminEmails: ['rizviyankhan@gmail.com', 'mursalinmatubbar1122@gmail.com'],
   profile: {
-    name: 'Prio Cinema',
+    name: 'Priyo Movie',
     imageUrl: '',
-    about: 'Prio Cinema administrator',
+    about: 'Priyo Movie administrator',
   },
 };
 
