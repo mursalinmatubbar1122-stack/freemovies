@@ -198,68 +198,88 @@ button {
 /* LOGO: PERFECT BALANCED SETUP FOR MOBILE & DESKTOP */
 .logo-btn {
   position: relative;
-  height: 48px;
+  height: 50px;
   padding: 4px 14px 4px 6px;
   background: rgba(255, 255, 255, 0.04);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   line-height: 1;
   text-decoration: none;
   font-family: 'Poppins', sans-serif;
   width: fit-content;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 .logo-btn:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(229, 9, 20, 0.6);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(229, 9, 20, 0.25);
+  border-color: rgba(229, 9, 20, 0.65);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.35);
+}
+.logo-badge-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #080c16;
+  border: 1px solid rgba(229, 9, 20, 0.55);
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.4);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+.logo-btn:hover .logo-badge-wrap {
+  border-color: #ff2a3b;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.7), 0 0 35px rgba(255, 180, 0, 0.3);
 }
 .logo-img-mark {
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center 20%;
-  border: 1px solid rgba(229, 9, 20, 0.5);
-  box-shadow: 0 0 10px rgba(229, 9, 20, 0.35);
-  flex-shrink: 0;
-  transition: transform 0.25s, box-shadow 0.25s;
+  object-position: center center;
+  display: block;
+  transition: transform 0.3s ease;
 }
 .logo-btn:hover .logo-img-mark {
-  transform: scale(1.05);
-  box-shadow: 0 0 16px rgba(229, 9, 20, 0.6);
+  transform: scale(1.08);
+}
+.logo-svg-mark {
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 .logo-title-group {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 5px;
   line-height: 1;
 }
 .logo-priyo {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   font-family: 'Poppins', sans-serif;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 .logo-movie {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 900;
   background: linear-gradient(135deg, #e50914 0%, #ff3366 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 0.06em;
   font-family: 'Montserrat', sans-serif;
-  filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.4));
+  filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.5));
 }
 
 .menu-nav {
@@ -2064,18 +2084,18 @@ button {
     padding: 0 8px 0 6px;
   }
   .logo-btn {
-    height: 38px;
-    padding: 2px 10px 2px 5px;
-    gap: 7px;
+    height: 42px;
+    padding: 2px 10px 2px 4px;
+    gap: 8px;
   }
-  .logo-img-mark {
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
+  .logo-badge-wrap {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
   }
   .logo-priyo,
   .logo-movie {
-    font-size: 15px;
+    font-size: 16px;
   }
   .menu-nav li button,
   .menu-nav li a {

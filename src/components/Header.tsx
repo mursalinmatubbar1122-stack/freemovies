@@ -3,6 +3,8 @@ import { ContentType, MediaItem, PersonItem } from '../types';
 import { searchMulti, getTitle, getYear, imgUrl, typeBg, typeLabel, AVPH, PH } from '../services/api';
 import { SITE_CONFIG } from '../config/siteConfig';
 
+import priyoMovieLogo from '../assets/images/priyo_movie_luxury_logo_1792296670970.jpg';
+
 interface HeaderProps {
   currentTab: ContentType;
   onSelectTab: (tab: ContentType) => void;
@@ -32,6 +34,8 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleAdv,
 }) => {
   const [logoIconIdx, setLogoIconIdx] = useState(0);
+  const [logoImgSrc, setLogoImgSrc] = useState<string>(priyoMovieLogo);
+  const [logoLoadFailed, setLogoLoadFailed] = useState<boolean>(false);
   const [query, setQuery] = useState('');
   const [suggestPeople, setSuggestPeople] = useState<PersonItem[]>([]);
   const [suggestMedia, setSuggestMedia] = useState<MediaItem[]>([]);
@@ -118,12 +122,27 @@ export const Header: React.FC<HeaderProps> = ({
           title={SITE_CONFIG.siteName}
           aria-label="Priyo Movie Home"
         >
-          <img
-            src="/src/assets/images/priyo_movie_logo_1792294427603.jpg"
-            alt="Priyo Movie Logo"
-            className="logo-img-mark"
-            referrerPolicy="no-referrer"
-          />
+          <div className="logo-badge-wrap">
+            {!logoLoadFailed ? (
+              <img
+                src={logoImgSrc}
+                alt="Priyo Movie Logo"
+                className="logo-img-mark"
+                onError={() => {
+                  if (logoImgSrc !== '/priyo_movie_luxury_logo.jpg') {
+                    setLogoImgSrc('/priyo_movie_luxury_logo.jpg');
+                  } else {
+                    setLogoLoadFailed(true);
+                  }
+                }}
+              />
+            ) : (
+              <svg className="logo-svg-mark" viewBox="0 0 36 36" width="30" height="30" fill="none">
+                <rect x="2" y="2" width="32" height="32" rx="8" fill="#0d111c" stroke="#e50914" strokeWidth="2" />
+                <polygon points="14,11 26,18 14,25" fill="#e50914" filter="drop-shadow(0 0 6px #ff2233)" />
+              </svg>
+            )}
+          </div>
 
           <div className="logo-title-group">
             <span className="logo-priyo">PRIYO</span>
