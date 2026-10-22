@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MediaDetail, MediaItem } from '../types';
 import {
   fetchMediaDetail,
@@ -44,22 +44,34 @@ export const DetailModal: React.FC<DetailModalProps> = ({
   const [downloadUrl, setDownloadUrl] = useState('');
   const [showUrlEditor, setShowUrlEditor] = useState<'player' | 'download' | null>(null);
   const [urlInput, setUrlInput] = useState('');
+  const [isCopied, setIsCopied] = useState(false);
+  const wasOpenedRef = useRef(false);
 
-  // Lock body scroll when modal is open
+  // Sync clean URL without '#' and lock body scroll
   useEffect(() => {
     if (item) {
+      wasOpenedRef.current = true;
       document.body.style.overflow = 'hidden';
-      // update hash
       const slug = (getTitle(item) || '')
         .toLowerCase()
         .replace(/[^a-z0-9 ]/g, '')
         .trim()
         .replace(/ +/g, '-')
-        .substring(0, 60);
-      window.history.replaceState(null, '', `#/${item.contentType}/${slug}/${item.id}`);
+        .substring(0, 60) || 'watch';
+      const cleanPath = `/${item.contentType}/${slug}/${item.id}`;
+      // Clean HTML5 push/replace without ugly '#'
+      if (window.location.pathname !== cleanPath || window.location.hash) {
+        window.history.replaceState({ mediaId: item.id, type: item.contentType }, '', cleanPath);
+      }
     } else {
       document.body.style.overflow = '';
-      window.history.replaceState(null, '', window.location.pathname);
+      // ONLY clean up URL if modal was previously open
+      if (wasOpenedRef.current) {
+        wasOpenedRef.current = false;
+        if (window.location.pathname !== '/' || window.location.hash) {
+          window.history.replaceState(null, '', '/');
+        }
+      }
     }
     return () => {
       document.body.style.overflow = '';
@@ -502,17 +514,23 @@ export const DetailModal: React.FC<DetailModalProps> = ({
               className="dv-btn btn-share"
               title="Share Link"
               onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                alert('Link copied to clipboard!');
+                const cleanHref = window.location.href.replace('/#/', '/');
+                navigator.clipboard.writeText(cleanHref);
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 2200);
               }}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <circle cx="18" cy="5" r="3" />
-                <circle cx="6" cy="12" r="3" />
-                <circle cx="18" cy="19" r="3" />
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-              </svg>
+              {isCopied ? (
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#4ade80', padding: '0 4px' }}>Copied!</span>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+              )}
             </button>
           </div>
         </div>

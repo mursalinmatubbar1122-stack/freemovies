@@ -74,32 +74,84 @@ export const App: React.FC = () => {
     });
   }, []);
 
-  // Check Hash for Deep-Linking
-  useEffect(() => {
-    const openFromHash = async () => {
-      const hash = window.location.hash;
-      if (!hash || !hash.startsWith('#/')) return;
-      const parts = hash.slice(2).split('/');
-      if (parts.length < 3) return;
-      const type = parts[0] as 'movie' | 'tv' | 'anime';
-      const id = parseInt(parts[parts.length - 1], 10);
-      if (!id) return;
+  // Resolve media from TMDB or AniList
+  const resolveAndOpenMedia = useCallback(async (type: 'movie' | 'tv' | 'anime', id: number) => {
+    try {
+      if (type === 'anime') {
+        const m = await fetchAniListById(id);
+        if (m) {
+          setSelectedItem(anilistToItem(m));
+          return true;
+        }
+      } else {
+        const d = await tmdb(`/${type}/${id}`);
+        if (d && d.id) {
+          setSelectedItem({ ...d, contentType: type });
+          return true;
+        }
+      }
+    } catch (err) {
+      console.error('Failed to open media from URL', err);
+    }
+    return false;
+  }, []);
 
-      try {
-        if (type === 'anime') {
-          const m = await fetchAniListById(id);
-          if (m) setSelectedItem(anilistToItem(m));
-        } else {
-          const d = await tmdb(`/${type}/${id}`);
-          if (d && d.id) {
-            setSelectedItem({ ...d, contentType: type });
+  // Universal Route Checker: supports Clean URLs (/movie/slug/id), Hash URLs (#/movie/slug/id), and query params
+  const checkCurrentRoute = useCallback(() => {
+    const hash = window.location.hash || '';
+    const pathname = window.location.pathname || '';
+
+    const extractTarget = (raw: string) => {
+      if (!raw) return null;
+      // Strip #, #/, or leading/trailing slashes
+      const clean = raw.replace(/^#\/?/, '').replace(/^\/+/, '').replace(/\/+$/, '');
+      if (!clean) return null;
+
+      const parts = clean.split('/').map(p => p.trim()).filter(Boolean);
+      if (parts.length === 0) return null;
+
+      const first = parts[0].toLowerCase();
+      if (first === 'movie' || first === 'tv' || first === 'anime') {
+        const type = first as 'movie' | 'tv' | 'anime';
+        // Look for the ID (usually the last numeric segment)
+        for (let i = parts.length - 1; i >= 1; i--) {
+          const parsedId = parseInt(parts[i], 10);
+          if (!isNaN(parsedId) && parsedId > 0) {
+            return { type, id: parsedId };
           }
         }
-      } catch {}
+      }
+      return null;
     };
 
-    openFromHash();
-  }, []);
+    // 1. Try Hash first (e.g. #/movie/insidious-out-of-the-further/1291595)
+    let target = extractTarget(hash);
+    // 2. Try Pathname if no hash target (e.g. /movie/insidious-out-of-the-further/1291595)
+    if (!target) {
+      target = extractTarget(pathname);
+    }
+
+    if (target) {
+      resolveAndOpenMedia(target.type, target.id);
+    }
+  }, [resolveAndOpenMedia]);
+
+  // Listen for initial load and route changes (back/forward, hashchange, popstate)
+  useEffect(() => {
+    checkCurrentRoute();
+
+    const handleRouteChange = () => {
+      checkCurrentRoute();
+    };
+
+    window.addEventListener('hashchange', handleRouteChange);
+    window.addEventListener('popstate', handleRouteChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange);
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, [checkCurrentRoute]);
 
   // Load initial content on Tab change
   const loadTabContent = useCallback(async (tab: ContentType) => {
